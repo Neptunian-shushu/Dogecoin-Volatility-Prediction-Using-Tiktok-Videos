@@ -1,0 +1,2 @@
+date,video_path,sentiment_score,sentiment_class,confidence,method,num_frames_analyzed,timestamp
+2025-10-10,videos/2025-10-10.mp4,-0.3985472321510315,NEGATIVE,MEDIUM,CLIP visual analysis from 5 frames,5,2025-10-10T16:19:27.576518
