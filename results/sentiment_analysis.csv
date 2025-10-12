@@ -1,2 +1,18 @@
-date,video_path,sentiment_score,sentiment_class,confidence,method,num_frames_analyzed,timestamp
-2025-10-10,videos/2025-10-10.mp4,-0.3985472321510315,NEGATIVE,MEDIUM,CLIP visual analysis from 5 frames,5,2025-10-10T16:19:27.576518
+date,num_videos,video_paths,sentiment_score,sentiment_class,confidence,method,num_frames_analyzed,timestamp
+2025-01-31,2,2025_01_31.mp4; 2025_01_31_1.mp4,-0.3795773386955261,NEGATIVE,MEDIUM,CLIP visual analysis from 10 total frames across 2 videos,10,2025-10-11T21:09:53.873813
+2025-02-04,2,2025_02_04.mp4; 2025_02_04_1.mp4,0.22850751876831055,POSITIVE,MEDIUM,CLIP visual analysis from 10 total frames across 2 videos,10,2025-10-11T21:09:55.135167
+2025-02-06,6,2025_02_06.mp4; 2025_02_06_1.mp4; 2025_02_06_2.mp4; 2025_02_06_3.mp4; 2025_02_06_4.mp4; 2025_02_06_5.mp4,0.10330381244421005,NEUTRAL,MEDIUM,CLIP visual analysis from 30 total frames across 6 videos,30,2025-10-11T21:10:00.707372
+2025-02-07,2,2025_02_07.mp4; 2025_02_07_1.mp4,0.5186164379119873,POSITIVE,HIGH,CLIP visual analysis from 10 total frames across 2 videos,10,2025-10-11T21:10:03.018216
+2025-02-10,1,2025_02_10.mp4,0.21550385653972626,POSITIVE,MEDIUM,CLIP visual analysis from 5 total frames across 1 videos,5,2025-10-11T21:10:03.815833
+2025-02-12,1,2025_02_12.mp4,-0.2240290641784668,NEGATIVE,MEDIUM,CLIP visual analysis from 5 total frames across 1 videos,5,2025-10-11T21:10:04.525057
+2025-02-13,1,2025_02_13.mp4,0.44742345809936523,POSITIVE,HIGH,CLIP visual analysis from 5 total frames across 1 videos,5,2025-10-11T21:10:05.473427
+2025-02-14,5,2025_02_14.mp4; 2025_02_14_1.mp4; 2025_02_14_1_1.mp4; 2025_02_14_2.mp4; 2025_02_14_3.mp4,0.005606202874332666,NEUTRAL,MEDIUM,CLIP visual analysis from 25 total frames across 5 videos,25,2025-10-11T21:10:09.371713
+2025-02-17,1,2025_02_17.mp4,0.08091332018375397,NEUTRAL,MEDIUM,CLIP visual analysis from 5 total frames across 1 videos,5,2025-10-11T21:10:10.675077
+2025-02-19,2,2025_02_19.mp4; 2025_02_19_2.mp4,0.24590258300304413,POSITIVE,MEDIUM,CLIP visual analysis from 10 total frames across 2 videos,10,2025-10-11T21:10:12.197587
+2025-02-20,1,2025_02_20.mp4,0.41864871978759766,POSITIVE,HIGH,CLIP visual analysis from 5 total frames across 1 videos,5,2025-10-11T21:10:13.375851
+2025-02-21,3,2025_02_21.mp4; 2025_02_21_1.mp4; 2025_02_21_2.mp4,0.11921658366918564,NEUTRAL,MEDIUM,CLIP visual analysis from 15 total frames across 3 videos,15,2025-10-11T21:10:15.483097
+2025-02-24,1,2025_02_24.mp4,-0.020808275789022446,NEUTRAL,MEDIUM,CLIP visual analysis from 5 total frames across 1 videos,5,2025-10-11T21:10:16.463567
+2025-02-25,2,2025_02_25.mp4; 2025_02_25_1.mp4,-0.16644957661628723,NEUTRAL,MEDIUM,CLIP visual analysis from 10 total frames across 2 videos,10,2025-10-11T21:10:18.244309
+2025-02-26,3,2025_02_26.mp4; 2025_02_26_1.mp4; 2025_02_26_2.mp4,-0.1601969450712204,NEUTRAL,MEDIUM,CLIP visual analysis from 15 total frames across 3 videos,15,2025-10-11T21:10:20.502799
+2025-02-27,3,2025_02_27.mp4; 2025_02_27_1.mp4; 2025_02_27_2.mp4,0.1896096020936966,NEUTRAL,MEDIUM,CLIP visual analysis from 15 total frames across 3 videos,15,2025-10-11T21:10:23.665353
+2025-02-28,3,2025_02_28.mp4; 2025_02_28_1.mp4; 2025_02_28_2.mp4,0.08544117957353592,NEUTRAL,MEDIUM,CLIP visual analysis from 15 total frames across 3 videos,15,2025-10-11T21:10:26.257512
