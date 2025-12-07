@@ -2,9 +2,18 @@
 
 This project analyzes cryptocurrency TikTok videos (specifically DogeCoin) to predict market sentiment using a **multimodal fusion approach** combining audio transcription, visual analysis, and multimodal reasoning.
 
+1. **Data collection** – automatically downloading TikTok videos, timestamps, and metadata from curated URLs.
+2. **Modeling** – multimodal sentiment analysis (audio + visual + reasoning) and time–series prediction of price / volatility using GRU models. :contentReference[oaicite:0]{index=0}  
+
 ## Table of Contents
 
 - [Overview](#overview)
+- [Data Collection](#data-collection)
+  - [Creator Selection](#creator-selection)
+  - [Stage 1 — URL Extraction & Timestamp Decoding](#stage-1--url-extraction--timestamp-decoding)
+  - [Stage 2 — Video Download via Local API (tiktokdl-api)](#stage-2--video-download-via-local-api-tiktokdl-api)
+  - [Stage 3 — Video Compression (FFmpeg)](#stage-3--video-compression-ffmpeg)
+- [Methodology Overview](#methodology-overview)
 - [Multimodal Fusion Architecture](#multimodal-fusion-architecture)
 - [Model Components](#model-components)
 - [Technical Details](#technical-details)
@@ -15,8 +24,99 @@ This project analyzes cryptocurrency TikTok videos (specifically DogeCoin) to pr
 - [PACE-ICE Cluster Execution](#pace-ice-cluster-execution)
 
 ---
-
 ## Overview
+To analyze Dogecoin-related sentiment from TikTok, we constructed a three-stage data collection pipeline that retrieves, timestamps, standardizes, and compresses TikTok videos from selected cryptocurrency creators.
+The pipeline relies entirely on publicly available content and open-source tools, avoiding TikTok’s official API (which is not designed for large-scale historical scraping).
+
+## Data Collection
+We used four open-source utilities throughout the data collection process.
+These tools support URL extraction, timestamp decoding, video downloading, and file compression.
+
+1. tiktok-to-ytdlp (URL Extraction)
+GitHub: https://github.com/dinoosauro/tiktok-to-ytdlp
+Used to automatically scroll TikTok creator profiles in the browser and retrieve all publicly accessible video URLs.
+
+2. TikTok Timestamp Decoder (DFIR Blog)
+URL: https://dfir.blog/tinkering-with-tiktok-timestamps/
+Each TikTok URL embeds a UNIX-epoch timestamp.
+We applied the documented decoding method to extract the true publication time for chronological alignment.
+
+3. tiktokdl-api (Video Download API)
+GitHub: https://github.com/BOTCAHX/tiktokdl-api
+This Node.js API retrieves downloadable MP4 video URLs and metadata.
+- setting up the local API server:
+```bash
+# inside tiktokdl-api/
+npm install
+node index.js
+```
+You will see:
+```bash
+Server started on - http://localhost:3000
+Port - 3000
+```
+Then your Python notebook sends GET requests such as:
+```bash
+requests.get("http://localhost:3000/video?url=<tiktok_url>")
+```
+
+4.FFmpeg (Compression & Standardization)
+Used to standardize resolution and compress large files.
+Your exact command:
+```bash
+ffmpeg -y -i input.mp4 \
+  -vf "scale=-2:480" \
+  -c:v libx264 -preset veryfast -crf 30 \
+  -c:a aac -b:a 96k \
+  output.mp4
+```
+
+### Creator Selection
+We manually curated a list of crypto-related TikTok creators who frequently post Dogecoin/Bitcoin market commentary:
+- coin guide
+- coinbureau
+- crypto jiggy
+- forrestunfiltered
+- girlgone crypto
+- im.cryptochino
+- imcameronscrubs
+- layahheilpernofficial
+- layahtrades
+- theblockchainboy
+- titovlogs77
+This ensures the collected videos truly reflect retail investor sentiment.
+
+### Data Collection Pipline
+
+#### Stage 1 — URL Extraction & Timestamp Decoding
+- Extract all video URLs
+   - Using tiktok-to-ytdlp, we automatically scrolled each creator’s TikTok page and exported all public video links into a CSV file.
+
+— Decode TikTok timestamps
+   - Every TikTok video URL contains an encoded UNIX timestamp. We extracted this using the DFIR decoding method and added it as a new column:
+```python
+decoded_datetime = datetime.fromtimestamp(tiktok_timestamp / 1000)
+```
+
+#### Stage 2 — Video Download via Local API (tiktokdl-api)
+The consolidated URLs were passed to a local tiktokdl-api server:
+- Start server:
+```bash
+node index.js
+```
+- For each TikTok link:
+   - Python script hits /video?url=<tiktok_url>
+   - Receives downloadable MP4 file URL
+   - Downloads and saves locally
+   - Renames MP4 file with timestamp and influencer name
+
+Final dataset: 1,803 videos (Jan–July 2025).
+
+#### Stage 3 — Video Compression (FFmpeg)
+All downloaded videos were standardized in resolution, Codec, CRF, Preset, and audio.
+
+
+## Methodology Overview
 
 This project implements a **multimodal fusion sentiment analyzer** that combines three complementary branches:
 
